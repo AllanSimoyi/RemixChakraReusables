@@ -1,0 +1,7 @@
+import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button } from "@chakra-ui/react";
+export function DeleteConfirmation(props) {
+    const { identifier, isOpen, isDeleting, onConfirm, onCancel, cancelRef } = props;
+    return (_jsx(AlertDialog, Object.assign({ isOpen: isOpen, leastDestructiveRef: cancelRef, onClose: onCancel }, { children: _jsx(AlertDialogOverlay, { children: _jsxs(AlertDialogContent, { children: [_jsxs(AlertDialogHeader, Object.assign({ fontSize: "sm", fontWeight: "bold" }, { children: ["Delete ", identifier] })), _jsx(AlertDialogBody, Object.assign({ fontSize: "sm" }, { children: "Are you sure? You cant undo this action afterwards." })), _jsxs(AlertDialogFooter, { children: [_jsx(Button, Object.assign({ fontSize: "sm", ref: cancelRef, onClick: onCancel, disabled: isDeleting }, { children: "Cancel" })), _jsxs(Button, Object.assign({ fontSize: "sm", colorScheme: "red", onClick: onConfirm, ml: 3, disabled: isDeleting }, { children: [!isDeleting && "Delete", isDeleting && "Deleting..."] }))] })] }) }) })));
+}
+//# sourceMappingURL=DeleteConfirmation.js.map
