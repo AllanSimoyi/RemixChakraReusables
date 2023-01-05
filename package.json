@@ -1,0 +1,52 @@
+{
+  "name": "remix_chakra_reusables",
+  "version": "1.0.0",
+  "description": "Reusable components, hooks and logic for Remix and Chakra based projects",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist/ && yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
+  },
+  "author": "Allan Simoyi",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@remix-run/node": "^1.9.0",
+    "@remix-run/react": "^1.9.0",
+    "@types/eslint": "^8.4.10",
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
+    "typescript": "^4.9.4",
+    "@chakra-ui/react": "^2.4.6",
+    "@cloudinary/react": "^1.8.0",
+    "@cloudinary/url-gen": "^1.8.7",
+    "@emotion/react": "^11",
+    "@emotion/server": "^11",
+    "@emotion/styled": "^11",
+    "dayjs": "^1.11.7",
+    "framer-motion": "^6",
+    "tabler-icons-react": "^1.56.0",
+    "zod": "^3.20.2"
+  },
+  "peerDependencies": {
+    "@remix-run/node": "^1.9.0",
+    "@remix-run/react": "^1.9.0",
+    "typescript": "^4.9.4",
+    "@chakra-ui/react": "^2.4.6",
+    "@cloudinary/react": "^1.8.0",
+    "@cloudinary/url-gen": "^1.8.7",
+    "@emotion/react": "^11",
+    "@emotion/server": "^11",
+    "@emotion/styled": "^11",
+    "dayjs": "^1.11.7",
+    "framer-motion": "^6",
+    "tabler-icons-react": "^1.56.0",
+    "zod": "^3.20.2"
+  }
+}
