@@ -19,6 +19,7 @@ __exportStar(require("./AppTitle"), exports);
 __exportStar(require("./BoundaryError"), exports);
 __exportStar(require("./CenteredView"), exports);
 __exportStar(require("./CloudinaryContextProvider"), exports);
+__exportStar(require("./CustomAlert"), exports);
 __exportStar(require("./CustomBreadcrumb"), exports);
 __exportStar(require("./CustomCatchBoundary"), exports);
 __exportStar(require("./CustomCheckbox"), exports);

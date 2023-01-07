@@ -3,6 +3,7 @@ export * from "./AppTitle";
 export * from "./BoundaryError";
 export * from "./CenteredView";
 export * from "./CloudinaryContextProvider";
+export * from "./CustomAlert";
 export * from "./CustomBreadcrumb";
 export * from "./CustomCatchBoundary";
 export * from "./CustomCheckbox";
