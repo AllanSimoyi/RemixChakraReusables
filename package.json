@@ -1,5 +1,9 @@
 {
-  "name": "remix_chakra_reusables",
+  "name": "remix-chakra-reusables",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AllanSimoyi/RemixChakraReusables.git"
+  },
   "version": "1.0.0",
   "description": "Reusable components, hooks and logic for Remix and Chakra based projects",
   "main": "dist/cjs/index.js",
