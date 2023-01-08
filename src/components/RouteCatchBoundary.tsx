@@ -22,6 +22,11 @@ export function RouteCatchBoundary ({ customerCareLink, loginLink }: Props) {
     case 400: {
       return (
         <BoundaryError title="Error 400 - Bad Request">
+          {caught.statusText && (
+            <Text fontSize="sm" textAlign={"center"}>
+              "{caught.statusText}"
+            </Text>
+          )}
           <Text fontSize="sm" textAlign={"center"}>
             We received a malformed or invalid request.
             Please review your input and ensure it is valid. <br />
@@ -39,6 +44,11 @@ export function RouteCatchBoundary ({ customerCareLink, loginLink }: Props) {
     case 401: {
       return (
         <BoundaryError title="Error 401 - Unauthorised">
+          {caught.statusText && (
+            <Text fontSize="sm" textAlign={"center"}>
+              "{caught.statusText}"
+            </Text>
+          )}
           <Text fontSize="sm" textAlign={"center"}>
             You're not authorised to access this resource.
             Please ensure you're logged in before requesting for this resource. <br />
@@ -58,6 +68,11 @@ export function RouteCatchBoundary ({ customerCareLink, loginLink }: Props) {
     case 403: {
       return (
         <BoundaryError title="Error 403 - Forbidden">
+          {caught.statusText && (
+            <Text fontSize="sm" textAlign={"center"}>
+              "{caught.statusText}"
+            </Text>
+          )}
           <Text fontSize="sm" textAlign={"center"}>
             You don't have permission to access this resource.
             Please ensure you're logged in using an account with the right access level. <br />
@@ -78,6 +93,11 @@ export function RouteCatchBoundary ({ customerCareLink, loginLink }: Props) {
       return (
         <BoundaryError title="Error 404 - Resource Not Found">
           <VStack align="flex-start" px={6}>
+            {caught.statusText && (
+              <Text fontSize="sm" textAlign={"center"}>
+                "{caught.statusText}"
+              </Text>
+            )}
             <Text fontSize="sm">
               We couldn't find that resource. <br />
             </Text>
@@ -109,7 +129,7 @@ export function RouteCatchBoundary ({ customerCareLink, loginLink }: Props) {
       );
     }
     default: {
-      throw new Error(`Unhandled error: ${caught.status}`);
+      throw new Error(`Unhandled error: ${caught.status}, ${caught.statusText}`);
     }
   }
 }
