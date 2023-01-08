@@ -16,6 +16,7 @@ export function Footer (props: Props) {
   return (
     <VStack
       align="stretch"
+      backdropFilter="saturate(180%) blur(5px)"
       backgroundColor={colorMode === "light" ? "whiteAlpha.800" : "whiteAlpha.200"}
     >
       <CenteredView p={4}>
