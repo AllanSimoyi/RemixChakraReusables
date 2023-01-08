@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import type { ButtonProps } from "@chakra-ui/react";
-interface Props extends ButtonProps {
+import { IconButtonProps } from "@chakra-ui/react";
+interface Props extends IconButtonProps {
 }
 export declare function ToggleColorMode(props: Props): JSX.Element;
 export {};

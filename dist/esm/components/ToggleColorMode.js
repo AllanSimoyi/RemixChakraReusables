@@ -1,7 +1,8 @@
-import { jsxs as _jsxs } from "react/jsx-runtime";
-import { Button, useColorMode } from "@chakra-ui/react";
+import { jsx as _jsx } from "react/jsx-runtime";
+import { IconButton, useColorMode } from "@chakra-ui/react";
+import { Moon, Sun } from "tabler-icons-react";
 export function ToggleColorMode(props) {
     const { colorMode, toggleColorMode } = useColorMode();
-    return (_jsxs(Button, Object.assign({ onClick: toggleColorMode }, props, { children: ["Toggle ", colorMode === 'light' ? 'Dark' : 'Light'] })));
+    return (_jsx(IconButton, Object.assign({ onClick: toggleColorMode, variant: "ghost", icon: colorMode === "dark" ? _jsx(Sun, {}) : _jsx(Moon, {}) }, props)));
 }
 //# sourceMappingURL=ToggleColorMode.js.map
