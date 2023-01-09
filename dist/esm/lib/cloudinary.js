@@ -12,11 +12,11 @@ import { fill, thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { byRadius } from "@cloudinary/url-gen/actions/roundCorners";
 export function cloudinaryImages(CLOUDINARY_CLOUD_NAME) {
     return {
-        getThumbnail: (publicId) => {
+        getThumbnail: (publicId, width = 250, height = 250) => {
             try {
                 let myImage = new CloudinaryImage(publicId, new CloudConfig({ cloudName: CLOUDINARY_CLOUD_NAME }));
                 myImage
-                    .resize(fill().width(250).height(250))
+                    .resize(fill().width(width).height(height))
                     .format('auto')
                     .quality('auto');
                 return myImage;
@@ -25,11 +25,11 @@ export function cloudinaryImages(CLOUDINARY_CLOUD_NAME) {
                 return new CloudinaryImage(publicId, new CloudConfig({ cloudName: CLOUDINARY_CLOUD_NAME }));
             }
         },
-        getUploadThumbnail: (publicId) => {
+        getUploadThumbnail: (publicId, width = 80, height = 80) => {
             try {
                 let myImage = new CloudinaryImage(publicId, new CloudConfig({ cloudName: CLOUDINARY_CLOUD_NAME }));
                 myImage
-                    .resize(thumbnail().width(80).height(80))
+                    .resize(thumbnail().width(width).height(height))
                     .roundCorners(byRadius(5))
                     .format('auto')
                     .quality('auto');

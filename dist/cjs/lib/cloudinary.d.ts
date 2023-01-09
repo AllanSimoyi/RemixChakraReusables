@@ -1,7 +1,7 @@
 import { CloudinaryImage } from "@cloudinary/url-gen";
 export declare function cloudinaryImages(CLOUDINARY_CLOUD_NAME: string): {
-    getThumbnail: (publicId: string) => CloudinaryImage;
-    getUploadThumbnail: (publicId: string) => CloudinaryImage;
+    getThumbnail: (publicId: string, width?: number, height?: number) => CloudinaryImage;
+    getUploadThumbnail: (publicId: string, width?: number, height?: number) => CloudinaryImage;
     getFullImage: (publicId: string) => CloudinaryImage;
 };
 export type UploadState = 'uploading' | 'uploaded' | 'error' | 'idle';

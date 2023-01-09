@@ -15,11 +15,11 @@ const resize_1 = require("@cloudinary/url-gen/actions/resize");
 const roundCorners_1 = require("@cloudinary/url-gen/actions/roundCorners");
 function cloudinaryImages(CLOUDINARY_CLOUD_NAME) {
     return {
-        getThumbnail: (publicId) => {
+        getThumbnail: (publicId, width = 250, height = 250) => {
             try {
                 let myImage = new url_gen_1.CloudinaryImage(publicId, new url_gen_1.CloudConfig({ cloudName: CLOUDINARY_CLOUD_NAME }));
                 myImage
-                    .resize((0, resize_1.fill)().width(250).height(250))
+                    .resize((0, resize_1.fill)().width(width).height(height))
                     .format('auto')
                     .quality('auto');
                 return myImage;
@@ -28,11 +28,11 @@ function cloudinaryImages(CLOUDINARY_CLOUD_NAME) {
                 return new url_gen_1.CloudinaryImage(publicId, new url_gen_1.CloudConfig({ cloudName: CLOUDINARY_CLOUD_NAME }));
             }
         },
-        getUploadThumbnail: (publicId) => {
+        getUploadThumbnail: (publicId, width = 80, height = 80) => {
             try {
                 let myImage = new url_gen_1.CloudinaryImage(publicId, new url_gen_1.CloudConfig({ cloudName: CLOUDINARY_CLOUD_NAME }));
                 myImage
-                    .resize((0, resize_1.thumbnail)().width(80).height(80))
+                    .resize((0, resize_1.thumbnail)().width(width).height(height))
                     .roundCorners((0, roundCorners_1.byRadius)(5))
                     .format('auto')
                     .quality('auto');

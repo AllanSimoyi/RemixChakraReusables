@@ -4,11 +4,11 @@ import { byRadius } from "@cloudinary/url-gen/actions/roundCorners";
 
 export function cloudinaryImages (CLOUDINARY_CLOUD_NAME: string) {
   return {
-    getThumbnail: (publicId: string) => {
+    getThumbnail: (publicId: string, width = 250, height = 250) => {
       try {
         let myImage = new CloudinaryImage(publicId, new CloudConfig({ cloudName: CLOUDINARY_CLOUD_NAME }));
         myImage
-          .resize(fill().width(250).height(250))
+          .resize(fill().width(width).height(height))
           .format('auto')
           .quality('auto');
         return myImage;
@@ -16,11 +16,11 @@ export function cloudinaryImages (CLOUDINARY_CLOUD_NAME: string) {
         return new CloudinaryImage(publicId, new CloudConfig({ cloudName: CLOUDINARY_CLOUD_NAME }));
       }
     },
-    getUploadThumbnail: (publicId: string) => {
+    getUploadThumbnail: (publicId: string, width = 80, height = 80) => {
       try {
         let myImage = new CloudinaryImage(publicId, new CloudConfig({ cloudName: CLOUDINARY_CLOUD_NAME }));
         myImage
-          .resize(thumbnail().width(80).height(80))
+          .resize(thumbnail().width(width).height(height))
           .roundCorners(byRadius(5))
           .format('auto')
           .quality('auto');
