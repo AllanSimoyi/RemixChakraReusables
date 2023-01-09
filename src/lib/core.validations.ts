@@ -130,11 +130,6 @@ export enum ImageUploadSizeLimit {
   DisplayValue = "2MB",
 };
 
-export enum CoreActionMethod {
-  MethodNameForDelete = "_method",
-  Delete = "1"
-}
-
 export async function getRawFormFields (request: Request) {
   const formData = await request.formData();
   return Object.fromEntries(formData.entries());
@@ -148,12 +143,15 @@ export async function getValidatedId (rawId: any) {
   return result.data;
 }
 
+export const METHOD_IDENTIFIER = "_method";
+export const DELETE_METHOD = "_delete";
+
 export function getIsOnlyDeleteMethod (formData: FormData) {
-  return formData.get(CoreActionMethod.MethodNameForDelete) === CoreActionMethod.Delete;
+  return formData.get(METHOD_IDENTIFIER) === DELETE_METHOD;
 }
 
 export function ensureOnlyDeleteMethod (formData: FormData) {
-  if (formData.get(CoreActionMethod.MethodNameForDelete) !== CoreActionMethod.Delete) {
+  if (formData.get(METHOD_IDENTIFIER) !== DELETE_METHOD) {
     throw new Response(ResponseMessage.InvalidMethod, { status: StatusCode.BadRequest });
   }
 }

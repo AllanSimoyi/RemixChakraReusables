@@ -69,14 +69,12 @@ export declare enum ImageUploadSizeLimit {
     Value = 2000000,
     DisplayValue = "2MB"
 }
-export declare enum CoreActionMethod {
-    MethodNameForDelete = "_method",
-    Delete = "1"
-}
 export declare function getRawFormFields(request: Request): Promise<{
     [k: string]: FormDataEntryValue;
 }>;
 export declare function getValidatedId(rawId: any): Promise<string>;
+export declare const METHOD_IDENTIFIER = "_method";
+export declare const DELETE_METHOD = "_delete";
 export declare function getIsOnlyDeleteMethod(formData: FormData): boolean;
 export declare function ensureOnlyDeleteMethod(formData: FormData): void;
 export declare function processBadRequest<DataType>(zodError: z.ZodError<DataType>, fields: any): import("@remix-run/node").TypedResponse<BaseActionData>;

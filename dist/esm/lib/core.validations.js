@@ -102,11 +102,6 @@ export var ImageUploadSizeLimit;
     ImageUploadSizeLimit["DisplayValue"] = "2MB";
 })(ImageUploadSizeLimit || (ImageUploadSizeLimit = {}));
 ;
-export var CoreActionMethod;
-(function (CoreActionMethod) {
-    CoreActionMethod["MethodNameForDelete"] = "_method";
-    CoreActionMethod["Delete"] = "1";
-})(CoreActionMethod || (CoreActionMethod = {}));
 export function getRawFormFields(request) {
     return __awaiter(this, void 0, void 0, function* () {
         const formData = yield request.formData();
@@ -122,11 +117,13 @@ export function getValidatedId(rawId) {
         return result.data;
     });
 }
+export const METHOD_IDENTIFIER = "_method";
+export const DELETE_METHOD = "_delete";
 export function getIsOnlyDeleteMethod(formData) {
-    return formData.get(CoreActionMethod.MethodNameForDelete) === CoreActionMethod.Delete;
+    return formData.get(METHOD_IDENTIFIER) === DELETE_METHOD;
 }
 export function ensureOnlyDeleteMethod(formData) {
-    if (formData.get(CoreActionMethod.MethodNameForDelete) !== CoreActionMethod.Delete) {
+    if (formData.get(METHOD_IDENTIFIER) !== DELETE_METHOD) {
         throw new Response(ResponseMessage.InvalidMethod, { status: StatusCode.BadRequest });
     }
 }

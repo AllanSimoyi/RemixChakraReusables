@@ -1,6 +1,6 @@
 import { Form } from "@remix-run/react";
 import { useDelete } from "../hooks/useDelete";
-import { CoreActionMethod } from "../lib/core.validations";
+import { METHOD_IDENTIFIER, DELETE_METHOD } from "../lib/core.validations";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 
 interface Props {
@@ -29,8 +29,8 @@ export function DeleteForm (props: Props) {
       />
       <input
         type="hidden"
-        name={CoreActionMethod.MethodNameForDelete}
-        value={CoreActionMethod.Delete}
+        name={METHOD_IDENTIFIER}
+        value={DELETE_METHOD}
       />
       {children}
     </Form>

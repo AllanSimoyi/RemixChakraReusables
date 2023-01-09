@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.processBadRequest = exports.ensureOnlyDeleteMethod = exports.getIsOnlyDeleteMethod = exports.getValidatedId = exports.getRawFormFields = exports.CoreActionMethod = exports.ImageUploadSizeLimit = exports.badRequest = exports.PAGE_SIZE_OPTIONS = exports.PageSize = exports.PaginationSchema = exports.ImageIdSchema = exports.RequiredImageIdSchema = exports.BooleanSchema = exports.DateSchema = exports.PositiveIntSchema = exports.PerhapsZeroIntSchema = exports.PerhapsZeroDecimalSchema = exports.PositiveDecimalSchema = exports.PhoneNumberSchema = exports.FullNameSchema = exports.PerhapsEmptyRecordIdSchema = exports.RecordIdSchema = exports.StringNumber = exports.CleanPositiveIntSchema = exports.Responses = exports.StatusCode = exports.ResponseMessage = exports.displayNumItems = void 0;
+exports.processBadRequest = exports.ensureOnlyDeleteMethod = exports.getIsOnlyDeleteMethod = exports.DELETE_METHOD = exports.METHOD_IDENTIFIER = exports.getValidatedId = exports.getRawFormFields = exports.ImageUploadSizeLimit = exports.badRequest = exports.PAGE_SIZE_OPTIONS = exports.PageSize = exports.PaginationSchema = exports.ImageIdSchema = exports.RequiredImageIdSchema = exports.BooleanSchema = exports.DateSchema = exports.PositiveIntSchema = exports.PerhapsZeroIntSchema = exports.PerhapsZeroDecimalSchema = exports.PositiveDecimalSchema = exports.PhoneNumberSchema = exports.FullNameSchema = exports.PerhapsEmptyRecordIdSchema = exports.RecordIdSchema = exports.StringNumber = exports.CleanPositiveIntSchema = exports.Responses = exports.StatusCode = exports.ResponseMessage = exports.displayNumItems = void 0;
 const node_1 = require("@remix-run/node");
 const zod_1 = require("zod");
 function displayNumItems(numProperties, singular, plural, suffix = "listed") {
@@ -107,11 +107,6 @@ var ImageUploadSizeLimit;
     ImageUploadSizeLimit["DisplayValue"] = "2MB";
 })(ImageUploadSizeLimit = exports.ImageUploadSizeLimit || (exports.ImageUploadSizeLimit = {}));
 ;
-var CoreActionMethod;
-(function (CoreActionMethod) {
-    CoreActionMethod["MethodNameForDelete"] = "_method";
-    CoreActionMethod["Delete"] = "1";
-})(CoreActionMethod = exports.CoreActionMethod || (exports.CoreActionMethod = {}));
 function getRawFormFields(request) {
     return __awaiter(this, void 0, void 0, function* () {
         const formData = yield request.formData();
@@ -129,12 +124,14 @@ function getValidatedId(rawId) {
     });
 }
 exports.getValidatedId = getValidatedId;
+exports.METHOD_IDENTIFIER = "_method";
+exports.DELETE_METHOD = "_delete";
 function getIsOnlyDeleteMethod(formData) {
-    return formData.get(CoreActionMethod.MethodNameForDelete) === CoreActionMethod.Delete;
+    return formData.get(exports.METHOD_IDENTIFIER) === exports.DELETE_METHOD;
 }
 exports.getIsOnlyDeleteMethod = getIsOnlyDeleteMethod;
 function ensureOnlyDeleteMethod(formData) {
-    if (formData.get(CoreActionMethod.MethodNameForDelete) !== CoreActionMethod.Delete) {
+    if (formData.get(exports.METHOD_IDENTIFIER) !== exports.DELETE_METHOD) {
         throw new Response(ResponseMessage.InvalidMethod, { status: StatusCode.BadRequest });
     }
 }
