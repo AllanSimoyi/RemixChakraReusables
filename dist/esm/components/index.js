@@ -20,7 +20,6 @@ export * from "./Logout";
 export * from "./OutlinedButton";
 export * from "./PrimaryButton";
 export * from "./RecordsNotFound";
-export * from "./RootBoundaryError";
 export * from "./RouteCatchBoundary";
 export * from "./RouteErrorBoundary";
 export * from "./SeveralErrors";

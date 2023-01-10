@@ -36,7 +36,6 @@ __exportStar(require("./Logout"), exports);
 __exportStar(require("./OutlinedButton"), exports);
 __exportStar(require("./PrimaryButton"), exports);
 __exportStar(require("./RecordsNotFound"), exports);
-__exportStar(require("./RootBoundaryError"), exports);
 __exportStar(require("./RouteCatchBoundary"), exports);
 __exportStar(require("./RouteErrorBoundary"), exports);
 __exportStar(require("./SeveralErrors"), exports);
