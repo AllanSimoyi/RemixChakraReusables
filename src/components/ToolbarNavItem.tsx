@@ -1,4 +1,4 @@
-import type { BorderProps, StackProps } from "@chakra-ui/react";
+import type { BorderProps, ButtonProps, StackProps } from "@chakra-ui/react";
 import { Button, VStack } from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
 
@@ -11,10 +11,11 @@ export interface NavItem {
 interface Props extends StackProps {
   navItem: NavItem;
   borderRadius?: BorderProps["borderRadius"];
+  buttonProps?: ButtonProps;
 }
 
 export function ToolbarNavItem (props: Props) {
-  const { navItem, borderRadius = 5, ...restOfProps } = props;
+  const { navItem, borderRadius = 5, buttonProps, ...restOfProps } = props;
 
   return (
     <VStack
@@ -27,11 +28,12 @@ export function ToolbarNavItem (props: Props) {
         as={Link}
         to={navItem.href}
         prefetch="intent"
-        variant={navItem.primary ? "solid" : "ghost"}
+        variant={navItem.primary ? "solid" : "outline"}
         colorScheme={navItem.primary ? "primary" : undefined}
         fontWeight={navItem.primary ? "bold" : "thin"}
         fontSize="sm"
         borderRadius={borderRadius}
+        {...buttonProps}
       >
         {navItem.text}
       </Button>
