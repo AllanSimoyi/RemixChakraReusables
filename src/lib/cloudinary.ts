@@ -82,21 +82,3 @@ export async function uploadToCloudinary (file: File, CLOUD_NAME: string, UPLOAD
     }
   });
 }
-
-// fetch(url, {
-    //   method: 'POST',
-    //   body: formData,
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     return resolve({
-    //       publicId: result.public_id as string,
-    //       url: result.url as string,
-    //       width: result.width as number,
-    //       height: result.height as number,
-    //     });
-    //   })
-    //   .catch(({ message }) => {
-    //     console.error('Upload to Cloudinary failed:', message as string);
-    //     reject(new Error('Upload to Cloudinary failed'));
-    //   });
