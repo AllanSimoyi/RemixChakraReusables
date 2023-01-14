@@ -10,16 +10,24 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import { Spinner } from '@chakra-ui/react';
-import { AdvancedImage, placeholder } from "@cloudinary/react";
+import { Img, Spinner } from '@chakra-ui/react';
+import { thumbnail } from '@cloudinary/url-gen/actions/resize';
+import { useMemo } from 'react';
 import { PhotoPlus, X } from 'tabler-icons-react';
-import { cloudinaryImages } from '../lib/cloudinary';
 import { useCloudinary } from './CloudinaryContextProvider';
 export function ImageUploadIcon(props) {
-    const { status, publicId } = props, otherProps = __rest(props, ["status", "publicId"]);
-    const { CLOUDINARY_CLOUD_NAME } = useCloudinary();
+    const { status, publicId, boxSize } = props, otherProps = __rest(props, ["status", "publicId", "boxSize"]);
+    const { CloudinaryUtil } = useCloudinary();
     if (status === 'uploaded') {
-        return (_jsx(AdvancedImage, { cldImg: cloudinaryImages(CLOUDINARY_CLOUD_NAME).getUploadThumbnail(publicId), plugins: [placeholder({ mode: 'pixelate' })] }));
+        const imageSrc = useMemo(() => {
+            return CloudinaryUtil
+                .image(publicId)
+                .resize(thumbnail().width(60).height(60))
+                .format('auto')
+                .quality('auto')
+                .toURL();
+        }, [publicId]);
+        return (_jsx(Img, { src: imageSrc, width: boxSize || "60px", height: boxSize || "60px" }));
     }
     if (status === 'error') {
         return _jsx(X, Object.assign({}, otherProps));

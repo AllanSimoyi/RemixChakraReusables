@@ -14,15 +14,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImageUploadIcon = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("@chakra-ui/react");
-const react_2 = require("@cloudinary/react");
+const resize_1 = require("@cloudinary/url-gen/actions/resize");
+const react_2 = require("react");
 const tabler_icons_react_1 = require("tabler-icons-react");
-const cloudinary_1 = require("../lib/cloudinary");
 const CloudinaryContextProvider_1 = require("./CloudinaryContextProvider");
 function ImageUploadIcon(props) {
-    const { status, publicId } = props, otherProps = __rest(props, ["status", "publicId"]);
-    const { CLOUDINARY_CLOUD_NAME } = (0, CloudinaryContextProvider_1.useCloudinary)();
+    const { status, publicId, boxSize } = props, otherProps = __rest(props, ["status", "publicId", "boxSize"]);
+    const { CloudinaryUtil } = (0, CloudinaryContextProvider_1.useCloudinary)();
     if (status === 'uploaded') {
-        return ((0, jsx_runtime_1.jsx)(react_2.AdvancedImage, { cldImg: (0, cloudinary_1.cloudinaryImages)(CLOUDINARY_CLOUD_NAME).getUploadThumbnail(publicId), plugins: [(0, react_2.placeholder)({ mode: 'pixelate' })] }));
+        const imageSrc = (0, react_2.useMemo)(() => {
+            return CloudinaryUtil
+                .image(publicId)
+                .resize((0, resize_1.thumbnail)().width(60).height(60))
+                .format('auto')
+                .quality('auto')
+                .toURL();
+        }, [publicId]);
+        return ((0, jsx_runtime_1.jsx)(react_1.Img, { src: imageSrc, width: boxSize || "60px", height: boxSize || "60px" }));
     }
     if (status === 'error') {
         return (0, jsx_runtime_1.jsx)(tabler_icons_react_1.X, Object.assign({}, otherProps));
