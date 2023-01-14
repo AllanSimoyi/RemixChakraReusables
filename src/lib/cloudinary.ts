@@ -61,24 +61,27 @@ export async function uploadToCloudinary (file: File, CLOUD_NAME: string, UPLOAD
     formData.append('tags', 'rte');
     formData.append('context', '');
 
-    const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
+    const uploadUrl = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
 
     try {
-      const response = await fetch(url, {
+      const response = await fetch(uploadUrl, {
         method: 'POST',
         body: formData
       });
-      const result = await response.json();
 
-      return resolve({
-        publicId: result.public_id as string,
-        url: result.url as string,
-        width: result.width as number,
-        height: result.height as number,
-      });
+      const result = await response.json();
+      if (!result) {
+        throw new Error("No result from cloudinary upload, please try again");
+      }
+
+      const { public_id: publicId, url, width, height } = result;
+
+      return resolve({ publicId, url, width, height, });
     } catch ({ message }) {
-      console.error('Upload to Cloudinary failed:', message as string);
-      return reject(new Error('Upload to Cloudinary failed'));
+      const defaultErrorMessage = "Cloudinary upload failed";
+      console.error(defaultErrorMessage, message as string);
+      
+      return reject(new Error(defaultErrorMessage));
     }
   });
 }
