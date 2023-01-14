@@ -1,22 +1,23 @@
+import { Cloudinary } from "@cloudinary/url-gen";
 import { useContext } from "react";
 import { createContext, useState } from "react";
 
 interface ContextProps {
   CLOUDINARY_CLOUD_NAME: string;
   CLOUDINARY_UPLOAD_RESET: string;
+  CloudinaryUtil: Cloudinary;
 }
 
 export const CloudinaryContext = createContext<ContextProps | undefined>(undefined);
 
-interface Props {
+interface Props extends ContextProps {
   children: React.ReactNode;
-  CLOUDINARY_CLOUD_NAME: string;
-  CLOUDINARY_UPLOAD_RESET: string;
 }
 
 export function CloudinaryContextProvider (props: Props) {
   const { children, ...restOfProps } = props;
   const [state] = useState(restOfProps);
+  
   return (
     <CloudinaryContext.Provider value={state}>
       {children}
