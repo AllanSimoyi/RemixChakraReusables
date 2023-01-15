@@ -1,13 +1,14 @@
-import { HStack, VStack } from "@chakra-ui/react";
+import { HStack, LayoutProps, VStack } from "@chakra-ui/react";
 import type { StackProps, } from "@chakra-ui/react";
 
 interface Props extends StackProps {
   children: React.ReactNode;
   innerProps?: StackProps;
+  w?: LayoutProps["w"];
 }
 
 export function CenteredView (props: Props) {
-  const { children, innerProps, ...restOfProps } = props
+  const { children, innerProps, w, ...restOfProps } = props
   return (
     <>
       <HStack
@@ -17,7 +18,7 @@ export function CenteredView (props: Props) {
       >
         <VStack
           align="stretch"
-          w={{ base: "100%", md: "100%", lg: "90%" }}
+          w={w || { base: "100%", md: "100%", lg: "90%" }}
           {...innerProps}
         >
           {children}

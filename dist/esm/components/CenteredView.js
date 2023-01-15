@@ -12,7 +12,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 import { jsx as _jsx, Fragment as _Fragment } from "react/jsx-runtime";
 import { HStack, VStack } from "@chakra-ui/react";
 export function CenteredView(props) {
-    const { children, innerProps } = props, restOfProps = __rest(props, ["children", "innerProps"]);
-    return (_jsx(_Fragment, { children: _jsx(HStack, Object.assign({ justify: "center", align: "stretch" }, restOfProps, { children: _jsx(VStack, Object.assign({ align: "stretch", w: { base: "100%", md: "100%", lg: "90%" } }, innerProps, { children: children })) })) }));
+    const { children, innerProps, w } = props, restOfProps = __rest(props, ["children", "innerProps", "w"]);
+    return (_jsx(_Fragment, { children: _jsx(HStack, Object.assign({ justify: "center", align: "stretch" }, restOfProps, { children: _jsx(VStack, Object.assign({ align: "stretch", w: w || { base: "100%", md: "100%", lg: "90%" } }, innerProps, { children: children })) })) }));
 }
 //# sourceMappingURL=CenteredView.js.map

@@ -15,8 +15,8 @@ exports.CenteredView = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("@chakra-ui/react");
 function CenteredView(props) {
-    const { children, innerProps } = props, restOfProps = __rest(props, ["children", "innerProps"]);
-    return ((0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: (0, jsx_runtime_1.jsx)(react_1.HStack, Object.assign({ justify: "center", align: "stretch" }, restOfProps, { children: (0, jsx_runtime_1.jsx)(react_1.VStack, Object.assign({ align: "stretch", w: { base: "100%", md: "100%", lg: "90%" } }, innerProps, { children: children })) })) }));
+    const { children, innerProps, w } = props, restOfProps = __rest(props, ["children", "innerProps", "w"]);
+    return ((0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: (0, jsx_runtime_1.jsx)(react_1.HStack, Object.assign({ justify: "center", align: "stretch" }, restOfProps, { children: (0, jsx_runtime_1.jsx)(react_1.VStack, Object.assign({ align: "stretch", w: w || { base: "100%", md: "100%", lg: "90%" } }, innerProps, { children: children })) })) }));
 }
 exports.CenteredView = CenteredView;
 //# sourceMappingURL=CenteredView.js.map
