@@ -1,3 +1,5 @@
+import { Result } from "./core.validations";
+
 export enum UploadState {
   Uploading = 'uploading',
   Uploaded = 'uploaded',
@@ -13,7 +15,7 @@ export interface ImageUploadResult {
 }
 
 export async function uploadToCloudinary (file: File, CLOUD_NAME: string, UPLOAD_RESET: string) {
-  return new Promise<ImageUploadResult>(async (resolve, reject) => {
+  return new Promise<Result<ImageUploadResult, Error>>(async (resolve, reject) => {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', UPLOAD_RESET);
@@ -35,12 +37,18 @@ export async function uploadToCloudinary (file: File, CLOUD_NAME: string, UPLOAD
 
       const { public_id: publicId, url, width, height } = result;
 
-      return resolve({ publicId, url, width, height, });
+      return resolve({
+        success: true,
+        data: { publicId, url, width, height, },
+      });
     } catch ({ message }) {
       const defaultErrorMessage = "Cloudinary upload failed";
       console.error(defaultErrorMessage, message as string);
       
-      return reject(new Error(defaultErrorMessage));
+      return resolve({
+        success: false,
+        err: new Error(defaultErrorMessage),
+      });
     }
   });
 }

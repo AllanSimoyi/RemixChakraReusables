@@ -1,3 +1,4 @@
+import { Result } from "./core.validations";
 export declare enum UploadState {
     Uploading = "uploading",
     Uploaded = "uploaded",
@@ -10,4 +11,4 @@ export interface ImageUploadResult {
     height: number;
     width: number;
 }
-export declare function uploadToCloudinary(file: File, CLOUD_NAME: string, UPLOAD_RESET: string): Promise<ImageUploadResult>;
+export declare function uploadToCloudinary(file: File, CLOUD_NAME: string, UPLOAD_RESET: string): Promise<Result<ImageUploadResult, Error>>;

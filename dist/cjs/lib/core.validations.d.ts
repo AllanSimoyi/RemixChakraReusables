@@ -1,5 +1,12 @@
 import { z } from "zod";
 export declare function displayNumItems(numProperties: number, singular: string, plural: string, suffix?: string): string;
+export type Result<Ok, Err> = {
+    success: true;
+    data: Ok;
+} | {
+    success: false;
+    err: Err;
+};
 export type CustomActionData<SchemaType extends z.ZodType<any, any, any>> = {
     formError?: string;
     fields?: z.infer<SchemaType>;

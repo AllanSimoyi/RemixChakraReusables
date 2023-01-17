@@ -36,12 +36,18 @@ function uploadToCloudinary(file, CLOUD_NAME, UPLOAD_RESET) {
                     throw new Error("No result from cloudinary upload, please try again");
                 }
                 const { public_id: publicId, url, width, height } = result;
-                return resolve({ publicId, url, width, height, });
+                return resolve({
+                    success: true,
+                    data: { publicId, url, width, height, },
+                });
             }
             catch ({ message }) {
                 const defaultErrorMessage = "Cloudinary upload failed";
                 console.error(defaultErrorMessage, message);
-                return reject(new Error(defaultErrorMessage));
+                return resolve({
+                    success: false,
+                    err: new Error(defaultErrorMessage),
+                });
             }
         }));
     });

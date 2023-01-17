@@ -5,6 +5,8 @@ export function displayNumItems (numProperties: number, singular: string, plural
   return `${numProperties} ${numProperties === 1 ? singular : plural} ${suffix}`;
 }
 
+export type Result<Ok, Err> = { success: true, data: Ok } | { success: false, err: Err }
+
 export type CustomActionData<SchemaType extends z.ZodType<any, any, any>> = {
   formError?: string
   fields?: z.infer<SchemaType>;
