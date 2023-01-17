@@ -96,12 +96,6 @@ export function badRequest(data) {
     return json(data, { status: 400 });
 }
 ;
-export var ImageUploadSizeLimit;
-(function (ImageUploadSizeLimit) {
-    ImageUploadSizeLimit[ImageUploadSizeLimit["Value"] = 2000000] = "Value";
-    ImageUploadSizeLimit["DisplayValue"] = "2MB";
-})(ImageUploadSizeLimit || (ImageUploadSizeLimit = {}));
-;
 export function getRawFormFields(request) {
     return __awaiter(this, void 0, void 0, function* () {
         const formData = yield request.formData();

@@ -7,6 +7,7 @@ interface Props {
     publicId: string;
     identifier: string;
     isProcessing: boolean;
+    uploadSizeLimit: number;
 }
 export declare function UploadImage(props: Props): JSX.Element;
 export {};

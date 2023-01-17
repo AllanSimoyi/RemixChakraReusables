@@ -65,10 +65,6 @@ interface BaseActionData {
     };
 }
 export declare function badRequest(data: BaseActionData): import("@remix-run/node").TypedResponse<BaseActionData>;
-export declare enum ImageUploadSizeLimit {
-    Value = 2000000,
-    DisplayValue = "2MB"
-}
 export declare function getRawFormFields(request: Request): Promise<{
     [k: string]: FormDataEntryValue;
 }>;

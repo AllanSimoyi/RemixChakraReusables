@@ -125,11 +125,6 @@ export function badRequest (data: BaseActionData) {
   return json(data, { status: 400 });
 };
 
-export enum ImageUploadSizeLimit {
-  Value = 2_000_000,
-  DisplayValue = "2MB",
-};
-
 export async function getRawFormFields (request: Request) {
   const formData = await request.formData();
   return Object.fromEntries(formData.entries());

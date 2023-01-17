@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.processBadRequest = exports.ensureOnlyDeleteMethod = exports.getIsOnlyDeleteMethod = exports.DELETE_METHOD = exports.METHOD_IDENTIFIER = exports.getValidatedId = exports.getRawFormFields = exports.ImageUploadSizeLimit = exports.badRequest = exports.PAGE_SIZE_OPTIONS = exports.PageSize = exports.PaginationSchema = exports.ImageIdSchema = exports.RequiredImageIdSchema = exports.BooleanSchema = exports.DateSchema = exports.PositiveIntSchema = exports.PerhapsZeroIntSchema = exports.PerhapsZeroDecimalSchema = exports.PositiveDecimalSchema = exports.PhoneNumberSchema = exports.FullNameSchema = exports.PerhapsEmptyRecordIdSchema = exports.RecordIdSchema = exports.StringNumber = exports.CleanPositiveIntSchema = exports.Responses = exports.StatusCode = exports.ResponseMessage = exports.displayNumItems = void 0;
+exports.processBadRequest = exports.ensureOnlyDeleteMethod = exports.getIsOnlyDeleteMethod = exports.DELETE_METHOD = exports.METHOD_IDENTIFIER = exports.getValidatedId = exports.getRawFormFields = exports.badRequest = exports.PAGE_SIZE_OPTIONS = exports.PageSize = exports.PaginationSchema = exports.ImageIdSchema = exports.RequiredImageIdSchema = exports.BooleanSchema = exports.DateSchema = exports.PositiveIntSchema = exports.PerhapsZeroIntSchema = exports.PerhapsZeroDecimalSchema = exports.PositiveDecimalSchema = exports.PhoneNumberSchema = exports.FullNameSchema = exports.PerhapsEmptyRecordIdSchema = exports.RecordIdSchema = exports.StringNumber = exports.CleanPositiveIntSchema = exports.Responses = exports.StatusCode = exports.ResponseMessage = exports.displayNumItems = void 0;
 const node_1 = require("@remix-run/node");
 const zod_1 = require("zod");
 function displayNumItems(numProperties, singular, plural, suffix = "listed") {
@@ -100,12 +100,6 @@ function badRequest(data) {
     return (0, node_1.json)(data, { status: 400 });
 }
 exports.badRequest = badRequest;
-;
-var ImageUploadSizeLimit;
-(function (ImageUploadSizeLimit) {
-    ImageUploadSizeLimit[ImageUploadSizeLimit["Value"] = 2000000] = "Value";
-    ImageUploadSizeLimit["DisplayValue"] = "2MB";
-})(ImageUploadSizeLimit = exports.ImageUploadSizeLimit || (exports.ImageUploadSizeLimit = {}));
 ;
 function getRawFormFields(request) {
     return __awaiter(this, void 0, void 0, function* () {

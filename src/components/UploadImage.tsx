@@ -1,7 +1,6 @@
 import { HStack, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import type { ChangeEvent } from 'react';
 import { useCallback } from 'react';
-import { ImageUploadSizeLimit } from '../lib/core.validations';
 import type { UploadState } from '../lib/cloudinary';
 import { ImageUploadIcon } from './ImageUploadIcon';
 
@@ -12,10 +11,11 @@ interface Props {
   publicId: string;
   identifier: string;
   isProcessing: boolean;
+  uploadSizeLimit: number;
 }
 
 export function UploadImage (props: Props) {
-  const { onChange, uploadState, uploadError, publicId, identifier, isProcessing } = props;
+  const { onChange, uploadState, uploadError, publicId, identifier, isProcessing, uploadSizeLimit } = props;
   const borderColor = useColorModeValue("blackAlpha.400", "whiteAlpha.400");
   const hoverBgColor = useColorModeValue("blackAlpha.100", "whiteAlpha.100");
 
@@ -65,7 +65,7 @@ export function UploadImage (props: Props) {
                 Upload {identifier}
               </Text>
               <Text cursor={"pointer"} fontSize="xs">
-                Image should not exceed {ImageUploadSizeLimit.DisplayValue}
+                Image should not exceed {uploadSizeLimit}
               </Text>
               {uploadError && (
                 <Text fontSize="sm" color="red.600">
