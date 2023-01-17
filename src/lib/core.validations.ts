@@ -114,6 +114,7 @@ export type inferSafeParseErrors<T extends z.ZodType<any, any, any>> = {
 };
 
 interface BaseActionData {
+  success: boolean;
   formError?: string;
   fields?: {
     [index: string]: any;
@@ -155,5 +156,10 @@ export function ensureOnlyDeleteMethod (formData: FormData) {
 
 export function processBadRequest<DataType> (zodError: z.ZodError<DataType>, fields: any) {
   const { formErrors, fieldErrors } = zodError.flatten();
-  return badRequest({ fields, fieldErrors, formError: formErrors.join(", ") });
+  return badRequest({
+    success: false,
+    fields,
+    fieldErrors,
+    formError: formErrors.join(", ")
+  });
 }

@@ -132,7 +132,12 @@ function ensureOnlyDeleteMethod(formData) {
 exports.ensureOnlyDeleteMethod = ensureOnlyDeleteMethod;
 function processBadRequest(zodError, fields) {
     const { formErrors, fieldErrors } = zodError.flatten();
-    return badRequest({ fields, fieldErrors, formError: formErrors.join(", ") });
+    return badRequest({
+        success: false,
+        fields,
+        fieldErrors,
+        formError: formErrors.join(", ")
+    });
 }
 exports.processBadRequest = processBadRequest;
 //# sourceMappingURL=core.validations.js.map

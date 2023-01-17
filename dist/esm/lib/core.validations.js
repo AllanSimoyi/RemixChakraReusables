@@ -123,6 +123,11 @@ export function ensureOnlyDeleteMethod(formData) {
 }
 export function processBadRequest(zodError, fields) {
     const { formErrors, fieldErrors } = zodError.flatten();
-    return badRequest({ fields, fieldErrors, formError: formErrors.join(", ") });
+    return badRequest({
+        success: false,
+        fields,
+        fieldErrors,
+        formError: formErrors.join(", ")
+    });
 }
 //# sourceMappingURL=core.validations.js.map

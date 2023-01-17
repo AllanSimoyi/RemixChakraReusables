@@ -63,6 +63,7 @@ export type inferSafeParseErrors<T extends z.ZodType<any, any, any>> = {
     [P in keyof z.infer<T>]?: string[];
 };
 interface BaseActionData {
+    success: boolean;
     formError?: string;
     fields?: {
         [index: string]: any;
