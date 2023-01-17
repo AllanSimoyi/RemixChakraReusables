@@ -8,6 +8,7 @@ export function displayNumItems (numProperties: number, singular: string, plural
 export type Result<Ok, Err> = { success: true, data: Ok } | { success: false, err: Err }
 
 export type CustomActionData<SchemaType extends z.ZodType<any, any, any>> = {
+  success: boolean;
   formError?: string
   fields?: z.infer<SchemaType>;
   fieldErrors?: inferSafeParseErrors<SchemaType>

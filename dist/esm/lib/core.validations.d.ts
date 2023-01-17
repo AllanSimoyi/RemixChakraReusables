@@ -8,6 +8,7 @@ export type Result<Ok, Err> = {
     err: Err;
 };
 export type CustomActionData<SchemaType extends z.ZodType<any, any, any>> = {
+    success: boolean;
     formError?: string;
     fields?: z.infer<SchemaType>;
     fieldErrors?: inferSafeParseErrors<SchemaType>;
