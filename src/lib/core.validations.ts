@@ -1,4 +1,4 @@
-import { json } from "@remix-run/node";
+import { json, TypedResponse } from "@remix-run/node";
 import { z } from "zod";
 
 export function displayNumItems (numProperties: number, singular: string, plural: string, suffix = "listed") {
@@ -8,7 +8,6 @@ export function displayNumItems (numProperties: number, singular: string, plural
 export type Result<Ok, Err> = { success: true, data: Ok } | { success: false, err: Err }
 
 export type CustomActionData<SchemaType extends z.ZodType<any, any, any>> = {
-  success: boolean;
   formError?: string
   fields?: z.infer<SchemaType>;
   fieldErrors?: inferSafeParseErrors<SchemaType>
@@ -115,7 +114,6 @@ export type inferSafeParseErrors<T extends z.ZodType<any, any, any>> = {
 };
 
 interface BaseActionData {
-  success: boolean;
   formError?: string;
   fields?: {
     [index: string]: any;
@@ -125,8 +123,8 @@ interface BaseActionData {
   }
 }
 
-export function badRequest (data: BaseActionData) {
-  return json(data, { status: 400 });
+export function badRequest (data: BaseActionData): TypedResponse<Result<undefined, BaseActionData>> {
+  return json({ success: false, err: data }, { status: 400 });
 };
 
 export async function getRawFormFields (request: Request) {
@@ -158,7 +156,6 @@ export function ensureOnlyDeleteMethod (formData: FormData) {
 export function processBadRequest<DataType> (zodError: z.ZodError<DataType>, fields: any) {
   const { formErrors, fieldErrors } = zodError.flatten();
   return badRequest({
-    success: false,
     fields,
     fieldErrors,
     formError: formErrors.join(", ")

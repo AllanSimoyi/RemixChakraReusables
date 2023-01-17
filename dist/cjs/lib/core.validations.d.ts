@@ -1,3 +1,4 @@
+import { TypedResponse } from "@remix-run/node";
 import { z } from "zod";
 export declare function displayNumItems(numProperties: number, singular: string, plural: string, suffix?: string): string;
 export type Result<Ok, Err> = {
@@ -8,7 +9,6 @@ export type Result<Ok, Err> = {
     err: Err;
 };
 export type CustomActionData<SchemaType extends z.ZodType<any, any, any>> = {
-    success: boolean;
     formError?: string;
     fields?: z.infer<SchemaType>;
     fieldErrors?: inferSafeParseErrors<SchemaType>;
@@ -64,7 +64,6 @@ export type inferSafeParseErrors<T extends z.ZodType<any, any, any>> = {
     [P in keyof z.infer<T>]?: string[];
 };
 interface BaseActionData {
-    success: boolean;
     formError?: string;
     fields?: {
         [index: string]: any;
@@ -73,7 +72,7 @@ interface BaseActionData {
         [index: string]: string[] | undefined;
     };
 }
-export declare function badRequest(data: BaseActionData): import("@remix-run/node").TypedResponse<BaseActionData>;
+export declare function badRequest(data: BaseActionData): TypedResponse<Result<undefined, BaseActionData>>;
 export declare function getRawFormFields(request: Request): Promise<{
     [k: string]: FormDataEntryValue;
 }>;
@@ -82,5 +81,5 @@ export declare const METHOD_IDENTIFIER = "_method";
 export declare const DELETE_METHOD = "_delete";
 export declare function getIsOnlyDeleteMethod(formData: FormData): boolean;
 export declare function ensureOnlyDeleteMethod(formData: FormData): void;
-export declare function processBadRequest<DataType>(zodError: z.ZodError<DataType>, fields: any): import("@remix-run/node").TypedResponse<BaseActionData>;
+export declare function processBadRequest<DataType>(zodError: z.ZodError<DataType>, fields: any): TypedResponse<Result<undefined, BaseActionData>>;
 export {};

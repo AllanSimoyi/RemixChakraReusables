@@ -93,7 +93,7 @@ export const PAGE_SIZE_OPTIONS = [
     PageSize.FiftySix,
 ];
 export function badRequest(data) {
-    return json(data, { status: 400 });
+    return json({ success: false, err: data }, { status: 400 });
 }
 ;
 export function getRawFormFields(request) {
@@ -124,7 +124,6 @@ export function ensureOnlyDeleteMethod(formData) {
 export function processBadRequest(zodError, fields) {
     const { formErrors, fieldErrors } = zodError.flatten();
     return badRequest({
-        success: false,
         fields,
         fieldErrors,
         formError: formErrors.join(", ")

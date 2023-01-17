@@ -97,7 +97,7 @@ exports.PAGE_SIZE_OPTIONS = [
     PageSize.FiftySix,
 ];
 function badRequest(data) {
-    return (0, node_1.json)(data, { status: 400 });
+    return (0, node_1.json)({ success: false, err: data }, { status: 400 });
 }
 exports.badRequest = badRequest;
 ;
@@ -133,7 +133,6 @@ exports.ensureOnlyDeleteMethod = ensureOnlyDeleteMethod;
 function processBadRequest(zodError, fields) {
     const { formErrors, fieldErrors } = zodError.flatten();
     return badRequest({
-        success: false,
         fields,
         fieldErrors,
         formError: formErrors.join(", ")
