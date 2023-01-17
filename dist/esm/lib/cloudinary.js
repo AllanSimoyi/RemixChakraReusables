@@ -7,6 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+export var UploadState;
+(function (UploadState) {
+    UploadState["Uploading"] = "uploading";
+    UploadState["Uploaded"] = "uploaded";
+    UploadState["Error"] = "error";
+    UploadState["Idle"] = "idle";
+})(UploadState || (UploadState = {}));
 export function uploadToCloudinary(file, CLOUD_NAME, UPLOAD_RESET) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
