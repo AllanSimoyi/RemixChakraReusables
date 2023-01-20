@@ -63,7 +63,7 @@ export declare const PAGE_SIZE_OPTIONS: PageSize[];
 export type inferSafeParseErrors<T extends z.ZodType<any, any, any>> = {
     [P in keyof z.infer<T>]?: string[];
 };
-interface BaseActionData {
+export interface BaseActionData {
     formError?: string;
     fields?: {
         [index: string]: any;
@@ -82,4 +82,3 @@ export declare const DELETE_METHOD = "_delete";
 export declare function getIsOnlyDeleteMethod(formData: FormData): boolean;
 export declare function ensureOnlyDeleteMethod(formData: FormData): void;
 export declare function processBadRequest<DataType>(zodError: z.ZodError<DataType>, fields: any): TypedResponse<Result<undefined, BaseActionData>>;
-export {};
