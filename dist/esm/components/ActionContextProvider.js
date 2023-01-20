@@ -26,7 +26,6 @@ export function useActionContext() {
 export function useField(name) {
     var _a, _b, _c, _d;
     const contextData = useActionContext();
-    console.log("contextData", contextData);
     if (contextData.success) {
         return {
             value: undefined,

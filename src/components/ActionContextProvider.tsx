@@ -30,8 +30,6 @@ export function useActionContext<Ok, Err> () {
 export function useField<FieldDataType = any> (name: string) {
   const contextData = useActionContext<any, BaseActionData>();
 
-  console.log("contextData", contextData);
-
   if (contextData.success) {
     return {
       value: undefined,
