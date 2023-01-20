@@ -1,30 +1,21 @@
 /// <reference types="react" />
-interface Indexable {
-    [x: string]: any;
-}
-interface BaseFieldErrors extends Indexable {
-    [x: string]: string[] | undefined;
-}
-interface ContextProps<Fields extends Indexable, FieldErrors extends BaseFieldErrors> {
-    formError?: string;
-    fields?: Fields;
-    fieldErrors?: FieldErrors;
-    isSubmitting?: boolean;
-}
-export declare const ActionContext: import("react").Context<ContextProps<Indexable, BaseFieldErrors> | undefined>;
-interface Props<Fields extends Indexable, FieldErrors extends BaseFieldErrors> {
+import { Result } from "../lib";
+type ContextProps<SuccessData = any, ActionData = any> = (Result<SuccessData, ActionData> | undefined) & {
+    isSubmitting: boolean;
+};
+export declare const ActionContext: import("react").Context<ContextProps<any, any> | undefined>;
+type Props<Ok, Err> = ContextProps<Ok, Err> & {
     children: React.ReactNode;
-    formError?: string;
-    fields?: Fields;
-    fieldErrors?: FieldErrors;
-    isSubmitting?: boolean;
-}
-export declare function ActionContextProvider<Fields extends Indexable, FieldErrors extends BaseFieldErrors>(props: Props<Fields, FieldErrors>): JSX.Element;
-export declare function useActionContext(): ContextProps<Indexable, BaseFieldErrors>;
-export declare function useField<DataType = any>(name: string): {
-    value: DataType;
+};
+export declare function ActionContextProvider<Ok, Err>(props: Props<Ok, Err>): JSX.Element;
+export declare function useActionContext<Ok, Err>(): ContextProps<Ok, Err>;
+export declare function useField<FieldDataType = any>(name: string): {
+    value: undefined;
+    error: undefined;
+} | {
+    value: FieldDataType;
     error: string[] | undefined;
 };
 export declare function useFormError(): string | undefined;
-export declare function useIsSubmitting(): boolean | undefined;
+export declare function useIsSubmitting(): boolean;
 export {};

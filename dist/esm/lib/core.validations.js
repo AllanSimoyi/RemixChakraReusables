@@ -129,4 +129,11 @@ export function processBadRequest(zodError, fields) {
         formError: formErrors.join(", ")
     });
 }
+export function formResultProps(data) {
+    return {
+        success: !!(data === null || data === void 0 ? void 0 : data.success),
+        data: (data === null || data === void 0 ? void 0 : data.success) ? data.data : undefined,
+        err: (data === null || data === void 0 ? void 0 : data.success) ? undefined : data === null || data === void 0 ? void 0 : data.err,
+    };
+}
 //# sourceMappingURL=core.validations.js.map

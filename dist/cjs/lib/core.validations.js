@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.processBadRequest = exports.ensureOnlyDeleteMethod = exports.getIsOnlyDeleteMethod = exports.DELETE_METHOD = exports.METHOD_IDENTIFIER = exports.getValidatedId = exports.getRawFormFields = exports.badRequest = exports.PAGE_SIZE_OPTIONS = exports.PageSize = exports.PaginationSchema = exports.ImageIdSchema = exports.RequiredImageIdSchema = exports.BooleanSchema = exports.DateSchema = exports.PositiveIntSchema = exports.PerhapsZeroIntSchema = exports.PerhapsZeroDecimalSchema = exports.PositiveDecimalSchema = exports.PhoneNumberSchema = exports.FullNameSchema = exports.PerhapsEmptyRecordIdSchema = exports.RecordIdSchema = exports.StringNumber = exports.CleanPositiveIntSchema = exports.Responses = exports.StatusCode = exports.ResponseMessage = exports.displayNumItems = void 0;
+exports.formResultProps = exports.processBadRequest = exports.ensureOnlyDeleteMethod = exports.getIsOnlyDeleteMethod = exports.DELETE_METHOD = exports.METHOD_IDENTIFIER = exports.getValidatedId = exports.getRawFormFields = exports.badRequest = exports.PAGE_SIZE_OPTIONS = exports.PageSize = exports.PaginationSchema = exports.ImageIdSchema = exports.RequiredImageIdSchema = exports.BooleanSchema = exports.DateSchema = exports.PositiveIntSchema = exports.PerhapsZeroIntSchema = exports.PerhapsZeroDecimalSchema = exports.PositiveDecimalSchema = exports.PhoneNumberSchema = exports.FullNameSchema = exports.PerhapsEmptyRecordIdSchema = exports.RecordIdSchema = exports.StringNumber = exports.CleanPositiveIntSchema = exports.Responses = exports.StatusCode = exports.ResponseMessage = exports.displayNumItems = void 0;
 const node_1 = require("@remix-run/node");
 const zod_1 = require("zod");
 function displayNumItems(numProperties, singular, plural, suffix = "listed") {
@@ -139,4 +139,12 @@ function processBadRequest(zodError, fields) {
     });
 }
 exports.processBadRequest = processBadRequest;
+function formResultProps(data) {
+    return {
+        success: !!(data === null || data === void 0 ? void 0 : data.success),
+        data: (data === null || data === void 0 ? void 0 : data.success) ? data.data : undefined,
+        err: (data === null || data === void 0 ? void 0 : data.success) ? undefined : data === null || data === void 0 ? void 0 : data.err,
+    };
+}
+exports.formResultProps = formResultProps;
 //# sourceMappingURL=core.validations.js.map

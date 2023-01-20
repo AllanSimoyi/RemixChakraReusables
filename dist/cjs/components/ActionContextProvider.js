@@ -29,16 +29,28 @@ function useActionContext() {
 }
 exports.useActionContext = useActionContext;
 function useField(name) {
-    const { fields, fieldErrors } = useActionContext();
+    var _a, _b, _c, _d;
+    const contextData = useActionContext();
+    console.log("contextData", contextData);
+    if (contextData.success) {
+        return {
+            value: undefined,
+            error: undefined,
+        };
+    }
     return {
-        value: fields === null || fields === void 0 ? void 0 : fields[name],
-        error: fieldErrors === null || fieldErrors === void 0 ? void 0 : fieldErrors[name],
+        value: (_b = (_a = contextData.err) === null || _a === void 0 ? void 0 : _a.fields) === null || _b === void 0 ? void 0 : _b[name],
+        error: (_d = (_c = contextData.err) === null || _c === void 0 ? void 0 : _c.fieldErrors) === null || _d === void 0 ? void 0 : _d[name]
     };
 }
 exports.useField = useField;
 function useFormError() {
-    const { formError } = useActionContext();
-    return formError;
+    var _a;
+    const contextData = useActionContext();
+    if (contextData.success) {
+        return undefined;
+    }
+    return (_a = contextData.err) === null || _a === void 0 ? void 0 : _a.formError;
 }
 exports.useFormError = useFormError;
 function useIsSubmitting() {

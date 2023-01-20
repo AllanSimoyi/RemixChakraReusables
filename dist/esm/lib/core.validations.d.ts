@@ -82,3 +82,8 @@ export declare const DELETE_METHOD = "_delete";
 export declare function getIsOnlyDeleteMethod(formData: FormData): boolean;
 export declare function ensureOnlyDeleteMethod(formData: FormData): void;
 export declare function processBadRequest<DataType>(zodError: z.ZodError<DataType>, fields: any): TypedResponse<Result<undefined, BaseActionData>>;
+export declare function formResultProps<Ok, Err>(data: Result<Ok, Err> | undefined): {
+    success: boolean;
+    data: Ok | undefined;
+    err: Err | undefined;
+};

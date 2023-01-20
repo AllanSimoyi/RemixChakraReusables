@@ -161,3 +161,11 @@ export function processBadRequest<DataType> (zodError: z.ZodError<DataType>, fie
     formError: formErrors.join(", ")
   });
 }
+
+export function formResultProps<Ok, Err> (data: Result<Ok, Err> | undefined) {
+  return {
+    success: !!data?.success,
+    data: data?.success ? data.data : undefined,
+    err: data?.success ? undefined : data?.err,
+  }
+}

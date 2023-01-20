@@ -1,33 +1,16 @@
 import { createContext, useContext } from "react";
+import { BaseActionData, Result } from "../lib";
 
-interface Indexable {
-  [x: string]: any;
+type ContextProps<SuccessData = any, ActionData = any> = (Result<SuccessData, ActionData> | undefined) & {
+  isSubmitting: boolean;
 }
 
-interface BaseFieldErrors extends Indexable {
-  [x: string]: string[] | undefined;
-}
+export const ActionContext = createContext<ContextProps | undefined>(undefined);
 
-interface ContextProps<Fields extends Indexable, FieldErrors extends BaseFieldErrors> {
-  formError?: string
-  fields?: Fields
-  fieldErrors?: FieldErrors
-  isSubmitting?: boolean
-}
-
-export const ActionContext = createContext<ContextProps<Indexable, BaseFieldErrors> | undefined>(undefined);
-
-interface Props<Fields extends Indexable, FieldErrors extends BaseFieldErrors> {
+type Props<Ok, Err> = ContextProps<Ok, Err> & {
   children: React.ReactNode;
-  formError?: string
-  fields?: Fields
-  fieldErrors?: FieldErrors
-  isSubmitting?: boolean
 }
-
-export function ActionContextProvider
-  <Fields extends Indexable, FieldErrors extends BaseFieldErrors>
-  (props: Props<Fields, FieldErrors>) {
+export function ActionContextProvider<Ok, Err> (props: Props<Ok, Err>) {
   const { children, ...restOfProps } = props;
   return (
     <ActionContext.Provider value={restOfProps}>
@@ -36,28 +19,41 @@ export function ActionContextProvider
   )
 }
 
-export function useActionContext () {
-  const context = useContext(ActionContext);
+export function useActionContext<Ok, Err> () {
+  const context = useContext<ContextProps<Ok, Err> | undefined>(ActionContext);
   if (!context) {
     throw new Error(`useActionContext must be used within an ActionContextProvider`);
   }
   return context;
 }
 
-export function useField<DataType = any> (name: string) {
-  const { fields, fieldErrors } = useActionContext();
+export function useField<FieldDataType = any> (name: string) {
+  const contextData = useActionContext<any, BaseActionData>();
+
+  console.log("contextData", contextData);
+
+  if (contextData.success) {
+    return {
+      value: undefined,
+      error: undefined,
+    }
+  }
   return {
-    value: fields?.[name] as DataType,
-    error: fieldErrors?.[name],
+    value: contextData.err?.fields?.[name] as FieldDataType,
+    error: contextData.err?.fieldErrors?.[name]
   }
 }
 
 export function useFormError () {
-  const { formError } = useActionContext();
-  return formError;
+  const contextData = useActionContext<any, BaseActionData>();
+
+  if (contextData.success) {
+    return undefined;
+  }
+  return contextData.err?.formError;
 }
 
 export function useIsSubmitting () {
-  const { isSubmitting } = useActionContext();
+  const { isSubmitting } = useActionContext<any, any>();
   return isSubmitting;
 }
